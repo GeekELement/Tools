@@ -9,7 +9,7 @@ chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
 
 # 重复搜索的次数
-repeat_count = 30  # 根据需要设置次数
+repeat_count = 10  # 根据需要设置次数
 
 for _ in range(repeat_count):
     # 生成一个六位数的随机数
