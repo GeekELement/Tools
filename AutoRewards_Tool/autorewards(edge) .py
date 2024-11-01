@@ -9,7 +9,7 @@ edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edge_path))
 
 # 重复搜索的次数
-repeat_count = 3  # 根据需要设置次数
+repeat_count = 30  # 根据需要设置次数
 
 for _ in range(repeat_count):
     # 生成一个六位数的随机数
