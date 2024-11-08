@@ -31,7 +31,7 @@ def send_integer(tcp_socket, value):
     print(f"发送帧: {list(frame)}")
 
 def main():
-    host = '192.168.2.171'  # Jetson平台的IP地址
+    host = '192.168.2.113'  # Jetson平台的IP地址
     port = 12345            # 服务器端口，根据实际情况修改
 
     # 创建TCP socket
