@@ -3,15 +3,14 @@ import keyboard
 import time
 
 # 主机与从机的网络配置
-SERVER_IP = "192.168.2.141"  # 从机IP
-SERVER_PORT = 5000
+SERVER_IP = "192.168.2.113"  # 从机IP
+SERVER_PORT = 5558
 
 # 帧协议定义
 FRAME_HEADER = 0x30
 FRAME_FOOTER = 0x40
-PULSE_STEP = 50
-current_pulse = 1500  # 舵机中值为1500
-
+PULSE_STEP = 6
+current_pulse = 976 # 舵机中值
 
 def calculate_crc(data):
     """计算CRC校验（前三字节异或）"""
