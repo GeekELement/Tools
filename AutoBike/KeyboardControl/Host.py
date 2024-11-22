@@ -3,7 +3,7 @@ import keyboard
 import time
 
 # 主机与从机的网络配置
-SERVER_IP = "192.168.2.113"  # 从机IP
+SERVER_IP = "192.168.2.171"  # 从机IP
 SERVER_PORT = 5558
 
 # 帧协议定义
