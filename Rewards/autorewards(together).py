@@ -74,4 +74,3 @@ for _ in range(repeat_count_chrome):
     
     # 等待任务被彻底关闭
     time.sleep(5)  # 增加等待时间以确保浏览器完全关闭
-
