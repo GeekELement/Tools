@@ -1,0 +1,22 @@
+label:
+- color: '#000000'
+  name: __background__
+- color: '#ff5500'
+  name: left_lane_0
+- color: '#aaff00'
+  name: left_lane_1
+- color: '#00ff00'
+  name: right_lane_0
+- color: '#ffff00'
+  name: right_lane_1
+software:
+  auto_save: false
+  contour_mode: external
+  current_converter: yolo
+  language: zh
+  mask_alpha: 0.6
+  show_edge: true
+  show_prompt: true
+  use_bfloat16: false
+  use_polydp: true
+  vertex_size: 1
