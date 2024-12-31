@@ -52,7 +52,7 @@ for _ in range(repeat_count_edge):
 
 # 切换浏览器间隙    
 time.sleep(5)
-
+#change ip
 for _ in range(repeat_count_edge2):
     # 使用 os.startfile() 打开 Edge2 快捷方式
     open_with_shortcut(edge2_shortcut_path)  # 使用 os.startfile() 启动快捷方式
