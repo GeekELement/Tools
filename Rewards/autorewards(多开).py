@@ -5,7 +5,7 @@ import pyautogui
 import subprocess
 import os
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt  # 添加这一行
+from PyQt5.QtCore import Qt
 
 # 定义 Edge 浏览器的路径
 edge_paths = [
@@ -58,13 +58,21 @@ class BrowserAutomationApp(QtWidgets.QWidget):
         # 获取用户输入
         repeat_count = int(self.repeat_count_input.text())
         gateway = self.gateway_input.text()
-        start_ip = int(self.start_ip_input.text().split('.')[-1])  # 获取最后一个数字
+        start_ip_parts = self.start_ip_input.text().split('.')
+        
+        # 确保输入的 IP 地址格式正确
+        if len(start_ip_parts) != 4:
+            print("起始 IP 格式不正确，请输入格式为 xxx.xxx.xxx.xxx")
+            return
+
+        start_ip_last = int(start_ip_parts[-1])  # 获取最后一个数字
+        base_ip_prefix = '.'.join(start_ip_parts[:-1])  # 获取前面部分，例如192.168.31
 
         subnet_mask = "255.255.255.0"
 
         for i, edge_path in enumerate(edge_paths):
             # 设置新的 IP 地址
-            current_ip = f"192.168.4.{start_ip + i}"  # 例如，85, 86, 87...
+            current_ip = f"{base_ip_prefix}.{start_ip_last + i}"  # 例如，192.168.31.80, 192.168.31.81...
             self.set_ip("以太网", current_ip, subnet_mask, gateway)  # 设置新的 IP 地址
             time.sleep(5)  # 等待 IP 地址切换生效
 
