@@ -1,20 +1,16 @@
-import asyncio
-from aio_ping import ping
+import subprocess
 
-async def ping_ip(ip, timeout=0.5):
+def ping_ip(ip):
     try:
-        result = await ping(ip, timeout=timeout)
-        if result:
+        result = subprocess.run(['ping', '-n', '1', ip], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=2)
+        if result.returncode == 0:
             print(f"{ip} is occupied.")
         else:
             print(f"{ip} is not occupied.")
-    except Exception as e:
-        print(f"Error pinging {ip}: {e}")
-
-async def main(ips):
-    tasks = [ping_ip(ip) for ip in ips]
-    await asyncio.gather(*tasks)
+    except subprocess.TimeoutExpired:
+        print(f"Ping to {ip} timed out.")
 
 if __name__ == "__main__":
-    ip_list = ['8.8.8.8', '192.168.4.1', '10.0.0.1']  # 替换为你要检测的IP列表
-    asyncio.run(main(ip_list))
+    ip_list = ['192.168.4.84', '192.168.4.1', '10.0.0.1']
+    for ip in ip_list:
+        ping_ip(ip)
