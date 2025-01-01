@@ -8,13 +8,6 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 import re
 
-# 定义 Edge 浏览器的路径
-edge_paths = [
-    r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",  # Edge
-    r"C:\Apps\Edge\Edge2\Edge2.lnk",  # Edge2
-    r"C:\Apps\Edge\Edge3\Edge3.lnk"   # Edge3
-]
-
 class BrowserAutomationApp(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
@@ -24,14 +17,17 @@ class BrowserAutomationApp(QtWidgets.QWidget):
         self.setWindowTitle('Browser Automation Settings')
         
         # 创建输入框和标签
-        self.repeat_count_label = QtWidgets.QLabel('搜索重复次数:')
+        self.repeat_count_label = QtWidgets.QLabel('重复次数:')
         self.repeat_count_input = QtWidgets.QLineEdit(self)
 
-        self.start_ip_label = QtWidgets.QLabel('起始 IP 最后一个段:')
+        self.account_count_label = QtWidgets.QLabel('账号个数:')
+        self.account_count_input = QtWidgets.QLineEdit(self)
+
+        self.start_ip_label = QtWidgets.QLabel('IP尾数:')
         self.start_ip_input = QtWidgets.QLineEdit(self)
 
         # 创建按钮
-        self.start_button = QtWidgets.QPushButton('开始自动化', self)
+        self.start_button = QtWidgets.QPushButton('开始', self)
         self.start_button.clicked.connect(self.start_automation)
 
         # 创建作者标签
@@ -42,6 +38,8 @@ class BrowserAutomationApp(QtWidgets.QWidget):
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.repeat_count_label)
         layout.addWidget(self.repeat_count_input)
+        layout.addWidget(self.account_count_label)
+        layout.addWidget(self.account_count_input)
         layout.addWidget(self.start_ip_label)
         layout.addWidget(self.start_ip_input)
         layout.addWidget(self.start_button)
@@ -53,12 +51,32 @@ class BrowserAutomationApp(QtWidgets.QWidget):
     def start_automation(self):
         # 获取用户输入
         repeat_count = int(self.repeat_count_input.text())
+        account_count = int(self.account_count_input.text())
         start_ip_last = self.start_ip_input.text().strip()
         
         # 验证输入是否为有效的整数，并在0到255之间
         if not start_ip_last.isdigit() or not (0 <= int(start_ip_last) <= 255):
             print("起始 IP 最后一个段格式不正确，请输入0到255之间的整数")
             return
+
+        # 生成Edge路径列表
+        edge_paths = []
+        # 第一个账号的路径
+        if account_count >= 1:
+            path1 = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+            if os.path.exists(path1):
+                edge_paths.append(path1)
+            else:
+                print(f"路径不存在: {path1}")
+                return
+        # 其他账号的路径
+        for i in range(2, account_count + 1):
+            path = rf"C:\Apps\Edge\Edge{i}\Edge{i}.lnk"
+            if os.path.exists(path):
+                edge_paths.append(path)
+            else:
+                print(f"路径不存在: {path}")
+                return
 
         # 定义前三个段
         base_ip_prefix = "192.168.4"
