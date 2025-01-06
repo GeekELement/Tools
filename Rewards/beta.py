@@ -39,8 +39,9 @@ class BrowserAutomationApp(QtWidgets.QWidget):
         layout.addWidget(self.repeat_count_label)
         layout.addWidget(self.repeat_count_input)
         layout.addWidget(self.account_count_label)
-        layout.addWidget(self.account_count_input)
-        layout.addWidget(self.start_ip_label)
+        layout.addWidget(self.account_`count_input)
+        """_summary_
+        """        layout.addWidget(self.start_ip_label)
         layout.addWidget(self.start_ip_input)
         layout.addWidget(self.start_button)
         layout.addStretch()  # 添加伸缩空间，使作者标签靠下
