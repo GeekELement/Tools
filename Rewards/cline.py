@@ -1,0 +1,80 @@
+import random
+import time
+import pyautogui
+import subprocess
+import os
+import signal
+import sys
+import msvcrt
+
+def signal_handler(sig, frame):
+    print('\n程序已终止')
+    sys.exit(0)
+
+def signal_handler(sig, frame):
+    print('\n程序已终止')
+    sys.exit(0)
+
+def start_automation():
+    # 设置信号处理
+    signal.signal(signal.SIGINT, signal_handler)
+    
+    repeat_count = 3  # 每个浏览器执行的搜索次数
+    edge_index = 1  # 从 Edge1 开始
+    
+    try:
+        while True:
+            # 检查键盘输入
+            if msvcrt.kbhit():
+                key = msvcrt.getch()
+                print("\n检测到键盘输入，程序终止")
+                sys.exit(0)
+            edge_path = f"C:\\Apps\\Edge\\Edge{edge_index}\\Edge{edge_index}.lnk"
+            if not os.path.exists(edge_path):
+                print(f"路径 {edge_path} 不存在，停止自动化。")
+                break
+
+            # 打开浏览器
+            open_with_shortcut(edge_path)
+            time.sleep(2)  # 等待浏览器完全打开
+
+            # 执行30次搜索
+            for _ in range(repeat_count):
+                random_number = random.randint(100000, 999999)
+                # 输入随机数并搜索
+                pyautogui.typewrite(str(random_number))
+                pyautogui.press('enter')
+                time.sleep(2)  # 等待搜索结果加载
+
+                # 如果还没有完成30次，则新开标签页
+                if _ < repeat_count - 1:
+                    pyautogui.hotkey('ctrl', 't')
+                    time.sleep(2)  # 等待新标签页加载
+
+            # 30次搜索完成后关闭浏览器
+            kill_browser_with_taskkill("msedge.exe")
+            time.sleep(2)  # 等待进程关闭
+
+            edge_index += 1  # 切换到下一个浏览器实例
+    except Exception as e:
+        print(f"程序异常终止: {e}")
+        sys.exit(1)
+
+def open_with_shortcut(path):
+    os.startfile(path)
+
+def kill_browser_with_taskkill(process_name):
+    subprocess.call(["taskkill", "/IM", process_name, "/F"])
+
+if __name__ == '__main__':
+    try:
+        start_automation()
+    except KeyboardInterrupt:
+        print('\n程序已终止')
+        sys.exit(0)
+if __name__ == '__main__':
+    try:
+        start_automation()
+    except KeyboardInterrupt:
+        print('\n程序已终止')
+        sys.exit(0)
