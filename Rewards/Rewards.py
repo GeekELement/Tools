@@ -9,7 +9,7 @@ def start_automation():
 
     edge_index = 1  # 从 Edge1 开始
     while True:
-        edge_path = f"C:\\Apps\\Edge\\Edge{edge_index}\\Edge{edge_index}.lnk"
+        edge_path = f"C:\\Edge\\Edge{edge_index}\\Edge{edge_index}.lnk"
         if not os.path.exists(edge_path):
             print(f"路径 {edge_path} 不存在，停止自动化。")
             break
