@@ -1,9 +1,0 @@
-label:
-- color: '#000000'
-  name: __background__
-- color: '#00ffff'
-  name: zebra
-- color: '#ff0000'
-  name: turn_sign
-- color: '#ffaaff'
-  name: cone

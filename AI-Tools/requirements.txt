@@ -1,0 +1,42 @@
+# YOLO AI Tools - Python Dependencies
+# For RTX 3050 Laptop GPU (CUDA 11.8)
+
+# PyTorch + CUDA 11.8 (Install separately first)
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+
+# YOLOv8
+ultralytics
+
+# Image Processing
+opencv-python
+Pillow
+
+# Data Processing
+numpy
+pandas
+
+# Visualization
+matplotlib
+seaborn
+tqdm
+
+# ML Tools
+scikit-learn
+scipy
+
+# Model Export
+onnx
+onnxruntime-gpu
+# TensorRT - install manually if needed:
+# pip install nvidia-pyindex
+# pip install nvidia-tensorrt
+
+# Logging
+tensorboard
+
+# Others
+PyYAML
+requests
+psutil
